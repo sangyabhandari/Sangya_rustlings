@@ -4,7 +4,7 @@
 // hint.
 // I am not done
 fn main() {
-    let x: i32 = 10;
+    let x: i32 = 40;
     println!("Number {}", x);
 }
 
