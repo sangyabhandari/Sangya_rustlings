@@ -6,7 +6,7 @@
 // I AM NOT DONE
 
 fn main() {
-    let x = 3;
+    let  mut x = 3; //As We are trying to assign new value to the variable so we are putting "mut" to make the varibale ,mutable as variable in rust are unmutable.
     println!("Number {}", x);
     x = 5; // don't change this line
     println!("Number {}", x);
