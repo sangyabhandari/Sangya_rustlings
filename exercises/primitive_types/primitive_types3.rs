@@ -8,7 +8,8 @@
 // I AM NOT DONE
 
 fn main() {
-    let a = ???
+    let a : [i32; 100] = [0 ; 100];
+    // syntax [T;N] where T is the type as N is the value
 
     if a.len() >= 100 {
         println!("Wow, that's a big array!");
