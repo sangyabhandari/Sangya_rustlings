@@ -13,5 +13,10 @@ fn main() {
 }
 
 fn current_favorite_color() -> String {
+    String::from("blue")
+}
+
+pub fn string_to_str() ->&'static str{
     "blue"
 }
+
