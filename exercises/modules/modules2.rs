@@ -11,8 +11,8 @@
 
 mod delicious_snacks {
     // TODO: Fix these use statements
-    use self::fruits::PEAR as ???
-    use self::veggies::CUCUMBER as ???
+    pub use self::fruits::PEAR as fruit;
+   pub  use self::veggies::CUCUMBER as veggie;
 
     mod fruits {
         pub const PEAR: &'static str = "Pear";
@@ -29,6 +29,6 @@ fn main() {
     println!(
         "favorite snacks: {} and {}",
         delicious_snacks::fruit,
-        delicious_snacks::veggie
+        delicious_snacks::veggie,
     );
 }
