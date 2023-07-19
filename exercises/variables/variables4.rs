@@ -3,7 +3,7 @@
 // Execute `rustlings hint variables4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 fn main() {
     let  mut x = 3; //As We are trying to assign new value to the variable so we are putting "mut" to make the varibale ,mutable as variable in rust are unmutable.
