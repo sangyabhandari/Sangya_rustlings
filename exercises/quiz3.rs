@@ -36,7 +36,6 @@ impl<G: std::fmt::Display> ReportCard<G> {
     }
     }    
     
-
 #[cfg(test)]
 mod tests {
     use super::*;
