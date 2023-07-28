@@ -11,6 +11,8 @@
 
 use std::num::ParseIntError;
 use std::str::FromStr;
+use core::iter::empty;
+use std::io::empty as other_empty;
 
 #[derive(Debug, PartialEq)]
 struct Person {
@@ -31,7 +33,7 @@ enum ParsePersonError {
     ParseInt(ParseIntError),
 }
 
-// I AM NOT DONE
+
 
 // Steps:
 // 1. If the length of the provided string is 0, an error should be returned
@@ -45,6 +47,7 @@ enum ParsePersonError {
 //    should be returned
 // If everything goes well, then return a Result of a Person object
 //
+//
 // As an aside: `Box<dyn Error>` implements `From<&'_ str>`. This means that if
 // you want to return a string error message, you can do so via just using
 // return `Err("my error message".into())`.
@@ -52,6 +55,40 @@ enum ParsePersonError {
 impl FromStr for Person {
     type Err = ParsePersonError;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        if s.len()==0{
+            return Err(ParsePersonError::Empty);
+        }
+
+    let mut it = s.split(',');
+
+    let Some(name) = it.next() else{
+        return Err(ParsePersonError::NoName);
+    
+    };
+
+    if name.is_empty(){
+        return Err(ParsePersonError::NoName);
+    };
+    if name.is_empty(){
+        return Err(ParsePersonError::NoName);
+    } 
+
+    let Some(age_s) = it.next()else{
+        return  Err(ParsePersonError::BadLen);
+    };
+    let age= 
+    age_s.parse::<usize>().map_err(|err|{
+        ParsePersonError::ParseInt(err)
+    })?;
+
+    if let Some(_too_many_commas) = it.next(){
+        return  Err(ParsePersonError::BadLen);
+    }
+
+    Ok(Person {
+        name:name.to_string(),
+        age,
+    })
     }
 }
 
@@ -131,3 +168,4 @@ mod tests {
         );
     }
 }
+
