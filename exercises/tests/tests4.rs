@@ -6,15 +6,15 @@
 // hint.
 
 
-
+use std::result::Result;
 struct Rectangle {
     width: i32,
-    height: i32
+    height: i32,
 }
 
 impl Rectangle {
     // Only change the test functions themselves
-    pub fn new(width: i32, height: i32) -> Self {
+    pub fn new(width: i32, height: i32) ->  Self {
         if width <= 0 || height <= 0 {
             panic!("Rectangle width and height cannot be negative!")
         }
@@ -35,14 +35,19 @@ mod tests {
     }
 
     #[test]
+    #[should_panic]
     fn negative_width() {
         // This test should check if program panics when we try to create rectangle with negative width
-        let _rect = Rectangle::new(-10, 10);
+        let _rect = Rectangle::new(-10,10);
+      
     }
 
     #[test]
+    #[should_panic]
     fn negative_height() {
+       let _rect = Rectangle::new(10,-10);
         // This test should check if program panics when we try to create rectangle with negative height
-        let _rect = Rectangle::new(10, -10);
+        
     }
 }
+

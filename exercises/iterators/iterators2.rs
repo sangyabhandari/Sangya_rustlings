@@ -16,7 +16,7 @@ pub fn capitalize_first(input: &str) -> String {
         None => String::new(),
         Some(first) => {
             let capital = first.to_uppercase();
-                format!("{capital} {}", c.as_str())
+                format!("{capital}{}", c.as_str())
         }
     }
 }

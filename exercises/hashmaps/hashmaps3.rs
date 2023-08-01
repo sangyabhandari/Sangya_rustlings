@@ -16,37 +16,16 @@
 
 
 use std::collections::HashMap;
- 
- fn build_scores_table(input: &str) -> HashMap<String,(u32, u32)>{
-    let mut scores_table: HashMap<String,(u32,u32)> = HashMap::new();
 
-    for line in input.lines(){
-        let parts: Vec<&str> = line.split (',').collect();
-        let team1_name = parts[0].to_string();
-        let team2_name = parts[1].to_string();
-        let team1_goals = parts[2].parse::<u32>().unwrap();
-        let team1_goals = parts[3].parse::<u32>().unwrap();
-
-         team1_score = score_table.entry(team1_name.clone()).or_inserrt((0,0));
-        team1_score.0 += team1_goals;
-        team1_score.1 += team2_goals;
-
-        let team1_score = score_table.entry(team2_name.clone()).or_inserrt((0,0));
-        team2_score.0 += team1_goals;
-        team2_score.1 += team2_goals;
-        
- }
-  scores_table
-}
-
-
+    
 // A structure to store the goal details of a team.
- /*struct Team {
+ struct Team {
     goals_scored: u8,
     goals_conceded: u8,
-}*/
+    name: String,
+ }
 
-/*fn build_scores_table(results: String) -> HashMap<String, Team> {
+fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
 
@@ -56,14 +35,47 @@ use std::collections::HashMap;
         let team_1_score: u8 = v[2].parse().unwrap();
         let team_2_name = v[1].to_string();
         let team_2_score: u8 = v[3].parse().unwrap();
-        // TODO: Populate the scores table with details extracted from the
-        // current line. Keep in mind that goals scored by team_1
-        // will be the number of goals conceded from team_2, and similarly
-        // goals scored by team_2 will be the number of goals conceded by
-        // team_1.
-    }
-    scores
-}*/
+        
+    
+
+
+ scores
+   .entry(team_1_name.clone())
+   .and_modify(|team| {
+     team.goals_scored +=team_1_score;
+     team.goals_conceded += team_2_score;
+
+   })
+
+   .or_insert(Team {
+     name: team_1_name,
+     goals_scored: team_1_score,
+     goals_conceded: team_2_score,
+
+   });
+
+
+scores
+   .entry(team_2_name.clone())
+   .and_modify(|team| {
+    team.goals_scored +=team_2_score;
+    team.goals_conceded += team_1_score;
+
+   })
+
+   .or_insert(Team {
+     name: team_2_name,
+     goals_scored: team_2_score,
+     goals_conceded: team_1_score,
+
+   });  
+}
+
+   scores
+
+}
+
+
 
 #[cfg(test)]
 mod tests {
@@ -102,7 +114,7 @@ mod tests {
     fn validate_team_score_2() {
         let scores = build_scores_table(get_results());
         let team = scores.get("Spain").unwrap();
+        assert_eq!(team.goals_conceded,2);
         assert_eq!(team.goals_scored, 0);
-        assert_eq!(team.goals_conceded, 2);
     }
 }
